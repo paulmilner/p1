@@ -26,5 +26,12 @@ public class Todger {
     public void setTodgerType(TodgerType todgerType){
         this.todgerType = todgerType;
     }
+
+	@Override
+	public String toString() {
+		return "Todger [name=" + name + ", todgerType=" + todgerType + "]";
+	}
+    
+    
     
 }
