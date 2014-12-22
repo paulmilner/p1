@@ -17,14 +17,8 @@ public class Todger {
     public String getName(){
         return name;
     }
-    public void setName(String name){
-        this.name = name;
-    }
     public TodgerType getTodgerType(){
         return todgerType;
-    }
-    public void setTodgerType(TodgerType todgerType){
-        this.todgerType = todgerType;
     }
 
 	@Override
