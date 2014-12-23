@@ -4,6 +4,9 @@ public enum TodgerType {
     
     MINOR,
     MAJOR,
-    SUPREME
+    SUPREME,
+    
+    RESIGNED,
+    FIRED
 
 }
