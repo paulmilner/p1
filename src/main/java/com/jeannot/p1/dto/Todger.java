@@ -4,14 +4,16 @@ public class Todger {
     
     private String name;
     private TodgerType todgerType;
+    private TodgerStatus todgerStatus;
     
     @SuppressWarnings ("unused")
     private Todger() {
     }
     
-    public Todger(String name, TodgerType todgerType) {
+    public Todger(String name, TodgerType todgerType, TodgerStatus todgerStatus) {
         this.name = name;
         this.todgerType = todgerType;
+        this.todgerStatus = todgerStatus;
     }
     
     public String getName(){
@@ -22,9 +24,13 @@ public class Todger {
     }
 
 	@Override
-	public String toString() {
-		return "Todger [name=" + name + ", todgerType=" + todgerType + "]";
-	}
+    public String toString(){
+        return "Todger [name=" + name + ", todgerType=" + todgerType + ", todgerStatus=" + todgerStatus + "]";
+    }
+
+    public TodgerStatus getTodgerStatus(){
+        return todgerStatus;
+    }
     
     
     

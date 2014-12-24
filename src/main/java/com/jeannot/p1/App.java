@@ -1,6 +1,7 @@
 package com.jeannot.p1;
 
 import com.jeannot.p1.dto.Todger;
+import com.jeannot.p1.dto.TodgerStatus;
 import com.jeannot.p1.dto.TodgerType;
 import com.jeannot.p1.services.TodgerPromotionService;
 import com.jeannot.p1.services.impl.SimpleTodgerPromotionService;
@@ -15,7 +16,7 @@ public class App
     {
         System.out.println( "Starting..." );
         
-        Todger t = new Todger("Alan", TodgerType.MINOR);
+        Todger t = new Todger("Alan", TodgerType.MINOR, TodgerStatus.THRUSTING);
         System.out.println(t.toString());
         System.out.println("Promoting todger...");
         
