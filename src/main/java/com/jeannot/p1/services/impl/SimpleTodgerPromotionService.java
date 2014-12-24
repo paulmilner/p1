@@ -15,7 +15,7 @@ public class SimpleTodgerPromotionService implements TodgerPromotionService {
             int nextTodgerTypeOrdinal = todgerType.ordinal()+1;
             todgerType = TodgerType.values()[nextTodgerTypeOrdinal];
         }
-        Todger promotedTodger = new Todger(todger.getName(),todgerType);
+        Todger promotedTodger = new Todger(todger.getName(),todgerType, todger.getTodgerStatus());
         return promotedTodger;
     }
 

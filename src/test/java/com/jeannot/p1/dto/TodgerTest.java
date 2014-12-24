@@ -24,7 +24,7 @@ public class TodgerTest {
     @Test
     public void successfulTodgerCreation() {
         String todgerName = "Alan";
-        Todger todger = new Todger(todgerName,TodgerType.MINOR);
+        Todger todger = new Todger(todgerName,TodgerType.MINOR, TodgerStatus.THRUSTING);
         assertEquals(todger.getName(),todgerName);
         assertTrue(todger.getTodgerType()==TodgerType.MINOR);
     }
@@ -32,7 +32,7 @@ public class TodgerTest {
     @Test
     public void successfulTodgerPromotion() {
         String todgerName = "Alan";
-        Todger todger1 = new Todger(todgerName,TodgerType.MINOR);
+        Todger todger1 = new Todger(todgerName,TodgerType.MINOR, TodgerStatus.THRUSTING);
         Todger promotedTodger1 = todgerPromotionService.promoteTodger(todger1);
         assertTrue(promotedTodger1.getTodgerType()==TodgerType.MAJOR);
         Todger promotedTodger2 = todgerPromotionService.promoteTodger(promotedTodger1);
