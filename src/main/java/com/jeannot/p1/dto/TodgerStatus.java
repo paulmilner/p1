@@ -5,6 +5,7 @@ public enum TodgerStatus {
     DORMANT,
     THRUSTING,
     RESIGNED,
-    FIRED
+    FIRED,
+    RETIRED
 
 }
