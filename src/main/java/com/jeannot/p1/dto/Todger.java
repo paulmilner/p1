@@ -1,5 +1,7 @@
 package com.jeannot.p1.dto;
 
+import org.apache.commons.lang3.Validate;
+
 public class Todger {
     
     private String name;
@@ -11,6 +13,7 @@ public class Todger {
     }
     
     public Todger(String name, TodgerType todgerType, TodgerStatus todgerStatus) {
+    	Validate.notNull(name);
         this.name = name;
         this.todgerType = todgerType;
         this.todgerStatus = todgerStatus;
