@@ -15,8 +15,8 @@ public class Todger {
     public Todger(String name, TodgerType todgerType, TodgerStatus todgerStatus) {
     	Validate.notNull(name);
         this.name = name;
-        this.todgerType = todgerType;
-        this.todgerStatus = todgerStatus;
+        this.todgerType = (todgerType==null) ? TodgerType.MINOR : todgerType;
+        this.todgerStatus = (todgerStatus==null) ? TodgerStatus.DORMANT: todgerStatus;
     }
     
     public String getName(){
