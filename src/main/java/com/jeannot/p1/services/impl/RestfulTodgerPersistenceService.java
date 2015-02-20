@@ -32,6 +32,7 @@ public class RestfulTodgerPersistenceService implements TodgerPersistenceService
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public synchronized long create(Todger todger){
         LOG.debug("create " + todger.toString());
         long id = todgerDatabase.getNextId();
