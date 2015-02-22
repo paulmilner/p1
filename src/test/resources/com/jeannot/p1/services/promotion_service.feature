@@ -1,6 +1,6 @@
-Feature: Todger promotion service
+Feature: Worker promotion service
 
-Scenario: You can promote a todger one rank at a time
-	Given a minor todger
+Scenario: You can promote a worker one rank at a time
+	Given a minor worker
 	When I promote it
-	Then the todger goes up by one rank
+	Then the worker goes up by one rank

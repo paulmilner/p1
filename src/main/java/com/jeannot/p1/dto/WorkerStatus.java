@@ -1,9 +1,9 @@
 package com.jeannot.p1.dto;
 
-public enum TodgerStatus {
+public enum WorkerStatus {
     
     DORMANT,
-    THRUSTING,
+    ACTIVE,
     RESIGNED,
     FIRED,
     RETIRED

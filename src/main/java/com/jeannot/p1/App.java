@@ -1,12 +1,12 @@
 package com.jeannot.p1;
 
-import com.jeannot.p1.dto.Todger;
-import com.jeannot.p1.dto.TodgerStatus;
-import com.jeannot.p1.dto.TodgerType;
-import com.jeannot.p1.services.TodgerPromotionService;
-import com.jeannot.p1.services.TodgerResignationService;
-import com.jeannot.p1.services.impl.SimpleTodgerPromotionService;
-import com.jeannot.p1.services.impl.SimpleTodgerResignationService;
+import com.jeannot.p1.dto.Worker;
+import com.jeannot.p1.dto.WorkerStatus;
+import com.jeannot.p1.dto.WorkerType;
+import com.jeannot.p1.services.WorkerPromotionService;
+import com.jeannot.p1.services.WorkerResignationService;
+import com.jeannot.p1.services.impl.SimpleWorkerPromotionService;
+import com.jeannot.p1.services.impl.SimpleWorkerResignationService;
 
 /**
  * Hello world!
@@ -18,23 +18,23 @@ public class App
     {
         System.out.println( "Starting..." );
         
-        Todger t = new Todger("Alan", TodgerType.MINOR, TodgerStatus.THRUSTING);
+        Worker t = new Worker("Alan", WorkerType.MINOR, WorkerStatus.ACTIVE);
         System.out.println(t.toString());
-        System.out.println("Promoting todger...");
+        System.out.println("Promoting worker...");
         
-        TodgerPromotionService todgerPromotionService = new SimpleTodgerPromotionService();
-        Todger t2 = todgerPromotionService.promoteTodger(t);
+        WorkerPromotionService workerPromotionService = new SimpleWorkerPromotionService();
+        Worker t2 = workerPromotionService.promoteWorker(t);
         System.out.println(t2.toString());
 
-        TodgerResignationService todgerResignationService = new SimpleTodgerResignationService();
-        System.out.println("Resigning todger...");
-        Todger t3 = todgerResignationService.resign(t2);
+        WorkerResignationService workerResignationService = new SimpleWorkerResignationService();
+        System.out.println("Resigning worker...");
+        Worker t3 = workerResignationService.resign(t2);
         System.out.println(t3.toString());
 
-        Todger t4 = new Todger("Andrew", TodgerType.MAJOR, TodgerStatus.THRUSTING);
+        Worker t4 = new Worker("Andrew", WorkerType.MAJOR, WorkerStatus.ACTIVE);
         System.out.println(t4.toString());
-        System.out.println("Firing todger...");
-        Todger t5 = todgerResignationService.fire(t4);
+        System.out.println("Firing worker...");
+        Worker t5 = workerResignationService.fire(t4);
         System.out.println(t5.toString());
 
         System.out.println( "Finished." );

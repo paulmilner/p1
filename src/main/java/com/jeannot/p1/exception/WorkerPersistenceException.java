@@ -1,10 +1,10 @@
 package com.jeannot.p1.exception;
 
-public class TodgerPersistenceException extends RuntimeException {
+public class WorkerPersistenceException extends RuntimeException {
     
     private static final long serialVersionUID = 1L;
 
-    public TodgerPersistenceException(String message) {
+    public WorkerPersistenceException(String message) {
         super(message);
     }
 
