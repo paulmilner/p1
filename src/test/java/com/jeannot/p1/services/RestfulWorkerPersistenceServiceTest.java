@@ -52,8 +52,8 @@ public class RestfulWorkerPersistenceServiceTest {
         try {
             workerPersistenceService.retrieve(id);
             fail("Exception should have been thrown as Worker has been deleted");
-        } catch (WorkerPersistenceException tpe) {
-            assertNotNull(tpe);
+        } catch (WorkerPersistenceException wpe) {
+            assertNotNull(wpe);
         }
     }
     
@@ -66,8 +66,8 @@ public class RestfulWorkerPersistenceServiceTest {
         try {
             workerPersistenceService.delete(2536562L); //should not exist
             fail("Exception should have been thrown as Worker does not exist");
-        } catch (WorkerPersistenceException tpe) {
-            assertNotNull(tpe);
+        } catch (WorkerPersistenceException wpe) {
+            assertNotNull(wpe);
         }
         workerPersistenceService.delete(id2);
         Set<Long> keys = workerPersistenceService.getKeys();

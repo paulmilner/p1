@@ -41,8 +41,8 @@ public class WorkerTest {
             Worker promotedWorker3 = workerPromotionService.promoteWorker(promotedWorker2);
             fail("An exception should have been thrown because the Worker cannot be promoted any further");
         }
-        catch (WorkerException te) {
-            assertNotNull(te);
+        catch (WorkerException we) {
+            assertNotNull(we);
         }
         
     }
