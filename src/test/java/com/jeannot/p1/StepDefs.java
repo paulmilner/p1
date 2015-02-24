@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 import com.jeannot.p1.dto.Worker;
 import com.jeannot.p1.dto.WorkerStatus;
 import com.jeannot.p1.dto.WorkerType;
-import com.jeannot.p1.exception.WorkerPersistenceException;
+import com.jeannot.p1.exception.RestfulApplicationException;
 import com.jeannot.p1.services.WorkerPersistenceService;
 import com.jeannot.p1.services.WorkerPromotionService;
 import com.jeannot.p1.services.impl.RestfulWorkerPersistenceService;
@@ -99,8 +99,8 @@ public class StepDefs {
 		try {
 			workerPersistenceService.retrieve(workerId);
 			fail("Exception should have been thrown on retrieving a deleted Worker");
-		} catch (WorkerPersistenceException wpe) {
-			assertNotNull(wpe);
+		} catch (RestfulApplicationException rae) {
+			assertNotNull(rae);
 		}
 	}
 }

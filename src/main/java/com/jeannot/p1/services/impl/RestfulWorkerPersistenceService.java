@@ -9,12 +9,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.apache.log4j.Logger;
 
 import com.jeannot.p1.dto.Worker;
+import com.jeannot.p1.exception.RestfulApplicationException;
 import com.jeannot.p1.exception.WorkerPersistenceException;
 import com.jeannot.p1.services.WorkerPersistenceService;
 
@@ -41,34 +43,37 @@ public class RestfulWorkerPersistenceService implements WorkerPersistenceService
     }
 
     @GET
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Worker retrieve(long id){
+    public Worker retrieve(@PathParam(value="id") long id){
         LOG.debug("get " + id);
         if (workerDatabase.getWorkers().keySet().contains(id)) {
             return workerDatabase.getWorkers().get(id);
         } else {
-            throw new WorkerPersistenceException("Unable to retrieve, could not find worker with id=" + id);
+            throw new RestfulApplicationException("Unable to retrieve, could not find worker with id=" + id);
         }
     }
 
     @PUT
+    @Path("{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public synchronized void update(long id, Worker worker){
+    public synchronized void update(@PathParam(value="id") long id, Worker worker){
         LOG.debug("update " + id + ":" + worker.toString());
         if (workerDatabase.getWorkers().keySet().contains(id)) {
             workerDatabase.getWorkers().put(id, worker);
         } else {
-            throw new WorkerPersistenceException("Unable to update, could not find worker with id=" + id);
+            throw new RestfulApplicationException("Unable to update, could not find worker with id=" + id);
         }
     }
 
     @DELETE
-    public synchronized void delete(long id){
+    @Path("{id}")
+    public synchronized void delete(@PathParam(value="id") long id){
         LOG.debug("delete " + id);
         if (workerDatabase.getWorkers().keySet().contains(id)) {
             workerDatabase.getWorkers().remove(id);
         } else {
-            throw new WorkerPersistenceException("Unable to delete, could not find worker with id=" + id);
+            throw new RestfulApplicationException("Unable to delete, could not find worker with id=" + id);
         }
     }
     

@@ -14,7 +14,7 @@ import org.junit.Test;
 import com.jeannot.p1.dto.Worker;
 import com.jeannot.p1.dto.WorkerStatus;
 import com.jeannot.p1.dto.WorkerType;
-import com.jeannot.p1.exception.WorkerPersistenceException;
+import com.jeannot.p1.exception.RestfulApplicationException;
 import com.jeannot.p1.services.impl.RestfulWorkerPersistenceService;
 
 public class RestfulWorkerPersistenceServiceTest {
@@ -52,8 +52,8 @@ public class RestfulWorkerPersistenceServiceTest {
         try {
             workerPersistenceService.retrieve(id);
             fail("Exception should have been thrown as Worker has been deleted");
-        } catch (WorkerPersistenceException wpe) {
-            assertNotNull(wpe);
+        } catch (RestfulApplicationException rae) {
+            assertNotNull(rae);
         }
     }
     
@@ -66,8 +66,8 @@ public class RestfulWorkerPersistenceServiceTest {
         try {
             workerPersistenceService.delete(2536562L); //should not exist
             fail("Exception should have been thrown as Worker does not exist");
-        } catch (WorkerPersistenceException wpe) {
-            assertNotNull(wpe);
+        } catch (RestfulApplicationException rae) {
+            assertNotNull(rae);
         }
         workerPersistenceService.delete(id2);
         Set<Long> keys = workerPersistenceService.getKeys();
