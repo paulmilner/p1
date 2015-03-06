@@ -9,7 +9,23 @@
       <li>{{worker.name}},{{worker.workerType}},{{worker.workerStatus}}</li>      
     </ul>
   </div>
-
+  
+  <!-- Native HTML auto-completion list! Who knew? HTML5 only though... -->
+  <input list="cheeses">
+  <datalist id="cheeses">
+  	<option value="Cheddar"/>
+  	<option value="Gruyere"/>
+  	<option value="Gorgonzola"/>
+  	<option value="Mozzarella"/>
+  	<option value="Wensleydale"/>
+  	<option value="Emmental"/>
+  	<option value="St Paulin"/>
+  	<option value="Roquefort"/>
+  	<option value="Red Leicester"/>
+  	<option value="Ricotta"/>
+  	<option value="Dairylea"/>
+  </datalist>
+  
   <script src="lib/angular/angular.js"></script>
   <script src="js/controllers.js"></script>
 </body>
