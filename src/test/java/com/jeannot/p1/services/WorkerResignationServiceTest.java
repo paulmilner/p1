@@ -22,7 +22,7 @@ public class WorkerResignationServiceTest {
     
 
     @Test
-    public void workerResignation() throws Exception {
+    public void worker_resignation() throws Exception {
         Worker worker = new Worker("Alan",WorkerType.MINOR, WorkerStatus.ACTIVE);
         Worker resignedWorker = workerResignationService.resign(worker);
         assertEquals(worker.getName(),resignedWorker.getName());
@@ -31,7 +31,7 @@ public class WorkerResignationServiceTest {
     }
     
     @Test
-    public void workerFired() throws Exception {
+    public void worker_fired() throws Exception {
         Worker worker = new Worker("Alan",WorkerType.MAJOR, WorkerStatus.ACTIVE);
         Worker firedWorker = workerResignationService.fire(worker);
         assertEquals(worker.getName(),firedWorker.getName());

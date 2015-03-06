@@ -22,7 +22,7 @@ public class WorkerTest {
     }
     
     @Test
-    public void successfulWorkerCreation() {
+    public void successful_worker_creation() {
         String workerName = "Alan";
         Worker worker = new Worker(workerName,WorkerType.MINOR, WorkerStatus.ACTIVE);
         assertEquals(worker.getName(),workerName);
@@ -30,7 +30,7 @@ public class WorkerTest {
     }
 
     @Test
-    public void successfulWorkerPromotion() {
+    public void successful_worker_promotion() {
         String workerName = "Alan";
         Worker worker1 = new Worker(workerName,WorkerType.MINOR, WorkerStatus.ACTIVE);
         Worker promotedWorker1 = workerPromotionService.promoteWorker(worker1);

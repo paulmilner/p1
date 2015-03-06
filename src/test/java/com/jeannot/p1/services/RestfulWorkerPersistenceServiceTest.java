@@ -6,6 +6,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import static org.mockito.Mockito.*;
+
 import java.util.Set;
 
 import org.junit.Before;
@@ -20,14 +22,16 @@ import com.jeannot.p1.services.impl.RestfulWorkerPersistenceService;
 public class RestfulWorkerPersistenceServiceTest {
     
     private WorkerPersistenceService workerPersistenceService;
+    private HistoryService historyService;
 
     @Before
     public void setup() throws Exception {
-        workerPersistenceService = new RestfulWorkerPersistenceService();
+        historyService = mock(HistoryService.class);
+        workerPersistenceService = new RestfulWorkerPersistenceService(historyService);
     }
     
     @Test
-    public void workerCreation() throws Exception {
+    public void worker_created() throws Exception {
         Worker worker = new Worker("Alan",WorkerType.MINOR, WorkerStatus.ACTIVE);
         long id = workerPersistenceService.create(worker);
         Worker retrievedWorker = workerPersistenceService.retrieve(id);
@@ -35,7 +39,7 @@ public class RestfulWorkerPersistenceServiceTest {
     }
     
     @Test
-    public void workerUpdate() throws Exception {
+    public void worker_updated() throws Exception {
         Worker worker = new Worker("Alan",WorkerType.MINOR, WorkerStatus.ACTIVE);
         long id = workerPersistenceService.create(worker);
         worker = new Worker("Brian",WorkerType.MAJOR, WorkerStatus.DORMANT);
@@ -45,7 +49,7 @@ public class RestfulWorkerPersistenceServiceTest {
     }
     
     @Test
-    public void workerDeletion() throws Exception {
+    public void worker_deleted() throws Exception {
         Worker worker = new Worker("Alan",WorkerType.MINOR, WorkerStatus.ACTIVE);
         long id = workerPersistenceService.create(worker);
         workerPersistenceService.delete(id);
@@ -58,7 +62,7 @@ public class RestfulWorkerPersistenceServiceTest {
     }
     
     @Test
-    public void workerIds() throws Exception {
+    public void worker_id_allocation() throws Exception {
         Worker worker = new Worker("Alan",WorkerType.MINOR, WorkerStatus.ACTIVE);
         long id1 = workerPersistenceService.create(worker);
         long id2 = workerPersistenceService.create(worker);
@@ -77,6 +81,15 @@ public class RestfulWorkerPersistenceServiceTest {
         
         Set<Worker> values = workerPersistenceService.getValues();
         assertTrue(values.contains(worker));
+    }
+    
+    @Test
+    public void worker_history_is_logged() throws Exception {
+        Worker worker = new Worker("Alan",WorkerType.MINOR, WorkerStatus.ACTIVE);
+        long id = workerPersistenceService.create(worker);
+        workerPersistenceService.delete(id);
+        verify(historyService,times(1)).addToHistory(any(Worker.class), anyString());
+        verify(historyService,times(1)).addToHistory(anyString());
     }
     
 }

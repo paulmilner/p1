@@ -3,11 +3,13 @@ package com.jeannot.p1;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 
 import com.jeannot.p1.dto.Worker;
 import com.jeannot.p1.dto.WorkerStatus;
 import com.jeannot.p1.dto.WorkerType;
 import com.jeannot.p1.exception.RestfulApplicationException;
+import com.jeannot.p1.services.HistoryService;
 import com.jeannot.p1.services.WorkerPersistenceService;
 import com.jeannot.p1.services.WorkerPromotionService;
 import com.jeannot.p1.services.impl.RestfulWorkerPersistenceService;
@@ -25,9 +27,12 @@ public class StepDefs {
 	private WorkerPromotionService workerPromotionService;
 	private long workerId;
 	
+	private HistoryService historyService;
+	
 	@Before
 	public void setup() throws Exception {
-		workerPersistenceService = new RestfulWorkerPersistenceService();
+        historyService = mock(HistoryService.class);
+		workerPersistenceService = new RestfulWorkerPersistenceService(historyService);
 		workerPromotionService = new SimpleWorkerPromotionService();
 	}
 	

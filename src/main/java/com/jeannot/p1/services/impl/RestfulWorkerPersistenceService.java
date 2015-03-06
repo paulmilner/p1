@@ -17,7 +17,7 @@ import org.apache.log4j.Logger;
 
 import com.jeannot.p1.dto.Worker;
 import com.jeannot.p1.exception.RestfulApplicationException;
-import com.jeannot.p1.exception.WorkerPersistenceException;
+import com.jeannot.p1.services.HistoryService;
 import com.jeannot.p1.services.WorkerPersistenceService;
 
 @Path("/worker")
@@ -25,9 +25,12 @@ public class RestfulWorkerPersistenceService implements WorkerPersistenceService
     
     private WorkerDatabase workerDatabase;
     
-    public RestfulWorkerPersistenceService() {
+    private HistoryService historyService; 
+    
+    public RestfulWorkerPersistenceService(HistoryService historyService) {
         LOG.debug("constructed");
         workerDatabase = WorkerDatabase.getInstance();
+        this.historyService = historyService;
     }
     
     public static Logger LOG = Logger.getLogger(RestfulWorkerPersistenceService.class);
@@ -39,6 +42,7 @@ public class RestfulWorkerPersistenceService implements WorkerPersistenceService
         LOG.debug("create " + worker.toString());
         long id = workerDatabase.getNextId();
         workerDatabase.getWorkers().put(id,worker);
+        historyService.addToHistory(worker, "created with id=" + id);
         return id;
     }
 
@@ -60,6 +64,7 @@ public class RestfulWorkerPersistenceService implements WorkerPersistenceService
     public synchronized void update(@PathParam(value="id") long id, Worker worker){
         LOG.debug("update " + id + ":" + worker.toString());
         if (workerDatabase.getWorkers().keySet().contains(id)) {
+            historyService.addToHistory(worker, "updated with id=" + id);
             workerDatabase.getWorkers().put(id, worker);
         } else {
             throw new RestfulApplicationException("Unable to update, could not find worker with id=" + id);
@@ -71,6 +76,7 @@ public class RestfulWorkerPersistenceService implements WorkerPersistenceService
     public synchronized void delete(@PathParam(value="id") long id){
         LOG.debug("delete " + id);
         if (workerDatabase.getWorkers().keySet().contains(id)) {
+            historyService.addToHistory("worker deleted id=" + id);
             workerDatabase.getWorkers().remove(id);
         } else {
             throw new RestfulApplicationException("Unable to delete, could not find worker with id=" + id);
